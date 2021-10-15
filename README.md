@@ -15,7 +15,7 @@ git clone https://github.com/53537/kube-backup.git
 # 创建一个namespace
 kubectl create ns kube-backup
 
-#创建SSH证书
+#创建SSH证书...≥≥≥			···
 ssh-keygen -f ./id_rsa
 ssh-keyscan $YOUR_GIT_URL > known_hosts
 
@@ -29,7 +29,7 @@ kubectl create secret generic kube-backup-ssh -n kube-backup --from-file=id_rsa 
 
 根据实际情况选择身份验证机制，此处为SSH认证，如果需要其他认证可参考后面的高级配置。
 
-创建备份保存的GIT仓库，且备份用户最好具有较高读写权限。比如创建的备份仓库地址：`git@gitlab.daocloud.cn:wei.wang/kube-backup.git`
+创建备份保存的GIT仓库，且备份用户最好具有较高读写权限。比如创建的备份仓库地址：`git@gitlab.xxx.cn:username/kube-backup.git`
 
 
 
@@ -43,7 +43,7 @@ kubectl create secret generic kube-backup-ssh -n kube-backup --from-file=id_rsa 
 
 ### 部署CronJob
 
-修改 cronjob-ssh.yaml 中GIT_REPO地址为`git@gitlab.daocloud.cn:wei.wang/kube-backup.git`
+修改 cronjob-ssh.yaml 中GIT_REPO地址为`git@gitlab.xxx.cn:username/kube-backup.git`
 
 ```shell
 # 应用这个目录下的3个yaml
