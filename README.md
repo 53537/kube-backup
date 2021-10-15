@@ -10,7 +10,7 @@ Kubernetes 资源备份工具，旨在作为 kubernetes Job 运行。
 
 ```shell
 # 下载源码
-git clone https://gitlab.daocloud.cn/ats/etc/dce-backup/kube-backup.git
+git clone https://github.com/53537/kube-backup.git
 
 # 创建一个namespace
 kubectl create ns kube-backup
