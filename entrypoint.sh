@@ -104,6 +104,7 @@ git add .
 
 if ! git diff-index --quiet HEAD --; then
     git commit -m "Automatic backup at $(date)"
+    git pull origin "${GIT_BRANCH}"
     git push origin "${GIT_BRANCH}"
 else
     echo "No change"
