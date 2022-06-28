@@ -15,7 +15,7 @@ metadata:
     app: kube-backup
 spec:
   schedule: "*/10 * * * *"
-  concurrencyPolicy: Replace
+  concurrencyPolicy: Allow
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 3
   jobTemplate:
@@ -26,6 +26,15 @@ spec:
             app: kube-backup
           name: kube-backup
         spec:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: beta.kubernetes.io/arch
+                    values:
+                    - amd64
+                    operator: In
           containers:
           - image: kinzhi/kube-backup:1.12.0-1
             imagePullPolicy: Always
@@ -38,6 +47,10 @@ spec:
               value: "git@git.example.com:infra/kube-backup.git"
             - name: RESOURCETYPES
               value: "ingress deployment configmap svc rc ds networkpolicy statefulset storageclass cronjob"
+            - name: GIT_PREFIX_PATH
+              value: /
+            - name: GIT_BRANCH
+              value: main
             volumeMounts:
             - mountPath: /backup/
               name: cache
